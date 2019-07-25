@@ -19,11 +19,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-//    xinfo_function();
-//    xinfo2(TSF"%_ %_", "123", 123);
-//    
-//    xinfo2(TSF"%0 %1 %0", "123", 345);
-//    xinfo2("%s %d", "232", 123);
+    xinfo_function();
+    xinfo2(TSF"%_ %_", "123", 123);
+
+    xinfo2(TSF"%0 %1 %0", "123", 345);
+    xinfo2("%s %d", "232", 123);
     
     return YES;
 }
