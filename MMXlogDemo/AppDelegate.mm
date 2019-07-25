@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#include <mars/xlog/xlogger.h>
+#include <mars/xlog/appender.h>
 
 @interface AppDelegate ()
 
@@ -16,7 +18,13 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+//    xinfo_function();
+//    xinfo2(TSF"%_ %_", "123", 123);
+//    
+//    xinfo2(TSF"%0 %1 %0", "123", 345);
+//    xinfo2("%s %d", "232", 123);
+    
     return YES;
 }
 
@@ -44,7 +52,8 @@
 
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    appender_close();
 }
 
 

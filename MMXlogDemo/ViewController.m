@@ -19,5 +19,10 @@
     // Do any additional setup after loading the view.
 }
 
+- (IBAction)btnClicked:(UIButton *)sender
+{
+    NSLog(@"----> %s", __func__);
+}
+
 
 @end
