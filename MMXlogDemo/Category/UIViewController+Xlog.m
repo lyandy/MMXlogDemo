@@ -9,7 +9,7 @@
 #import "UIViewController+Xlog.h"
 #import <objc/runtime.h>
 #import "NSObject+Swizzle.h"
-#import "LogUtil.h"
+#import "MMXlog.h"
 
 @implementation UIViewController (Xlog)
 
@@ -42,31 +42,31 @@
 #pragma mark - Method Swizzling
 - (void)xl_viewDidLoad
 {
-    LOG_INFO("Page", @"%@-%s",  NSStringFromClass([self class]), __func__);
+    MMXLOG_INFO("Page", @"%@-%s",  NSStringFromClass([self class]), __func__);
     [self xl_viewDidLoad];
 }
 
 - (void)xl_viewWillAppear:(BOOL)animated
 {
-    LOG_INFO("Page", @"%@-%s",  NSStringFromClass([self class]), __func__);
+    MMXLOG_INFO("Page", @"%@-%s",  NSStringFromClass([self class]), __func__);
     [self xl_viewWillAppear:animated];
 }
 
 - (void)xl_viewDidAppear:(BOOL)animated
 {
-    LOG_INFO("Page", @"%@-%s",  NSStringFromClass([self class]), __func__);
+    MMXLOG_INFO("Page", @"%@-%s",  NSStringFromClass([self class]), __func__);
     [self xl_viewDidAppear:animated];
 }
 
 - (void)xl_viewWillDisappear:(BOOL)animated
 {
-    LOG_INFO("Page", @"%@-%s",  NSStringFromClass([self class]), __func__);
+    MMXLOG_INFO("Page", @"%@-%s",  NSStringFromClass([self class]), __func__);
     [self xl_viewWillDisappear:animated];
 }
 
 - (void)xl_viewDidDisappear:(BOOL)animated
 {
-    LOG_INFO("Page", @"%@-%s",  NSStringFromClass([self class]), __func__);
+    MMXLOG_INFO("Page", @"%@-%s",  NSStringFromClass([self class]), __func__);
     [self xl_viewDidDisappear:animated];
 }
 

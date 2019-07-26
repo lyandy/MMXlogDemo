@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B659882B22E9BDD200E6B531 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = B659882A22E9BDD200E6B531 /* AppDelegate.mm */; };
+		B63DD0BE22EAAAFA0028E3A8 /* MMXlog.m in Sources */ = {isa = PBXBuildFile; fileRef = B63DD0BD22EAAAFA0028E3A8 /* MMXlog.m */; };
+		B63DD0C122EAAB370028E3A8 /* MMXlogUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = B63DD0C022EAAB370028E3A8 /* MMXlogUtil.mm */; };
+		B659882B22E9BDD200E6B531 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B659882A22E9BDD200E6B531 /* AppDelegate.m */; };
 		B659882E22E9BDD200E6B531 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B659882D22E9BDD200E6B531 /* ViewController.m */; };
 		B659883122E9BDD200E6B531 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B659882F22E9BDD200E6B531 /* Main.storyboard */; };
 		B659883322E9BDD300E6B531 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B659883222E9BDD300E6B531 /* Assets.xcassets */; };
 		B659883622E9BDD300E6B531 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B659883422E9BDD300E6B531 /* LaunchScreen.storyboard */; };
-		B659883922E9BDD300E6B531 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = B659883822E9BDD300E6B531 /* main.mm */; };
+		B659883922E9BDD300E6B531 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B659883822E9BDD300E6B531 /* main.m */; };
 		B659884422E9BE3F00E6B531 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B659884322E9BE3F00E6B531 /* UIKit.framework */; };
 		B659884622E9BE8E00E6B531 /* mars.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B659884522E9BE8E00E6B531 /* mars.framework */; };
 		B659884822E9BE9D00E6B531 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B659884722E9BE9D00E6B531 /* SystemConfiguration.framework */; };
@@ -20,24 +22,26 @@
 		B659884C22E9BEC400E6B531 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B659884B22E9BEC400E6B531 /* libz.tbd */; };
 		B659884E22E9BECD00E6B531 /* libresolv.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B659884D22E9BECD00E6B531 /* libresolv.9.tbd */; };
 		B659885022E9C0EB00E6B531 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B659884F22E9C0EB00E6B531 /* CoreTelephony.framework */; };
-		B659885622E9C1EA00E6B531 /* LogUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = B659885222E9C1EA00E6B531 /* LogUtil.m */; };
-		B659885722E9C1EA00E6B531 /* LogHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = B659885422E9C1EA00E6B531 /* LogHelper.mm */; };
 		B659885B22E9CE8E00E6B531 /* UIButton+Xlog.m in Sources */ = {isa = PBXBuildFile; fileRef = B659885A22E9CE8E00E6B531 /* UIButton+Xlog.m */; };
 		B659885E22E9CEA000E6B531 /* UIViewController+Xlog.m in Sources */ = {isa = PBXBuildFile; fileRef = B659885D22E9CEA000E6B531 /* UIViewController+Xlog.m */; };
 		B659886622E9CFC900E6B531 /* NSObject+Swizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = B659886522E9CFC900E6B531 /* NSObject+Swizzle.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B63DD0BC22EAAAFA0028E3A8 /* MMXlog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMXlog.h; sourceTree = "<group>"; };
+		B63DD0BD22EAAAFA0028E3A8 /* MMXlog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MMXlog.m; sourceTree = "<group>"; };
+		B63DD0BF22EAAB370028E3A8 /* MMXlogUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMXlogUtil.h; sourceTree = "<group>"; };
+		B63DD0C022EAAB370028E3A8 /* MMXlogUtil.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MMXlogUtil.mm; sourceTree = "<group>"; };
 		B659882622E9BDD200E6B531 /* MMXlogDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MMXlogDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B659882922E9BDD200E6B531 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		B659882A22E9BDD200E6B531 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
+		B659882A22E9BDD200E6B531 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		B659882C22E9BDD200E6B531 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		B659882D22E9BDD200E6B531 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		B659883022E9BDD200E6B531 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B659883222E9BDD300E6B531 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B659883522E9BDD300E6B531 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B659883722E9BDD300E6B531 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B659883822E9BDD300E6B531 /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
+		B659883822E9BDD300E6B531 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B659884322E9BE3F00E6B531 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B659884522E9BE8E00E6B531 /* mars.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = mars.framework; sourceTree = "<group>"; };
 		B659884722E9BE9D00E6B531 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -45,10 +49,6 @@
 		B659884B22E9BEC400E6B531 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		B659884D22E9BECD00E6B531 /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
 		B659884F22E9C0EB00E6B531 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
-		B659885222E9C1EA00E6B531 /* LogUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogUtil.m; sourceTree = "<group>"; };
-		B659885322E9C1EA00E6B531 /* LogUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogUtil.h; sourceTree = "<group>"; };
-		B659885422E9C1EA00E6B531 /* LogHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LogHelper.mm; sourceTree = "<group>"; };
-		B659885522E9C1EA00E6B531 /* LogHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogHelper.h; sourceTree = "<group>"; };
 		B659885922E9CE8E00E6B531 /* UIButton+Xlog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+Xlog.h"; sourceTree = "<group>"; };
 		B659885A22E9CE8E00E6B531 /* UIButton+Xlog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Xlog.m"; sourceTree = "<group>"; };
 		B659885C22E9CEA000E6B531 /* UIViewController+Xlog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Xlog.h"; sourceTree = "<group>"; };
@@ -75,6 +75,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B63DD0BB22EAA9900028E3A8 /* MMXlog */ = {
+			isa = PBXGroup;
+			children = (
+				B63DD0BC22EAAAFA0028E3A8 /* MMXlog.h */,
+				B63DD0BD22EAAAFA0028E3A8 /* MMXlog.m */,
+				B63DD0BF22EAAB370028E3A8 /* MMXlogUtil.h */,
+				B63DD0C022EAAB370028E3A8 /* MMXlogUtil.mm */,
+			);
+			path = MMXlog;
+			sourceTree = "<group>";
+		};
 		B659881D22E9BDD200E6B531 = {
 			isa = PBXGroup;
 			children = (
@@ -95,17 +106,17 @@
 		B659882822E9BDD200E6B531 /* MMXlogDemo */ = {
 			isa = PBXGroup;
 			children = (
+				B63DD0BB22EAA9900028E3A8 /* MMXlog */,
 				B659885822E9C3BC00E6B531 /* Category */,
-				B659885122E9C1C100E6B531 /* Component */,
 				B659882922E9BDD200E6B531 /* AppDelegate.h */,
-				B659882A22E9BDD200E6B531 /* AppDelegate.mm */,
+				B659882A22E9BDD200E6B531 /* AppDelegate.m */,
 				B659882C22E9BDD200E6B531 /* ViewController.h */,
 				B659882D22E9BDD200E6B531 /* ViewController.m */,
 				B659882F22E9BDD200E6B531 /* Main.storyboard */,
 				B659883222E9BDD300E6B531 /* Assets.xcassets */,
 				B659883422E9BDD300E6B531 /* LaunchScreen.storyboard */,
 				B659883722E9BDD300E6B531 /* Info.plist */,
-				B659883822E9BDD300E6B531 /* main.mm */,
+				B659883822E9BDD300E6B531 /* main.m */,
 			);
 			path = MMXlogDemo;
 			sourceTree = "<group>";
@@ -122,17 +133,6 @@
 				B659884322E9BE3F00E6B531 /* UIKit.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		B659885122E9C1C100E6B531 /* Component */ = {
-			isa = PBXGroup;
-			children = (
-				B659885522E9C1EA00E6B531 /* LogHelper.h */,
-				B659885422E9C1EA00E6B531 /* LogHelper.mm */,
-				B659885322E9C1EA00E6B531 /* LogUtil.h */,
-				B659885222E9C1EA00E6B531 /* LogUtil.m */,
-			);
-			path = Component;
 			sourceTree = "<group>";
 		};
 		B659885822E9C3BC00E6B531 /* Category */ = {
@@ -218,14 +218,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B659885622E9C1EA00E6B531 /* LogUtil.m in Sources */,
 				B659885B22E9CE8E00E6B531 /* UIButton+Xlog.m in Sources */,
 				B659882E22E9BDD200E6B531 /* ViewController.m in Sources */,
+				B63DD0C122EAAB370028E3A8 /* MMXlogUtil.mm in Sources */,
 				B659886622E9CFC900E6B531 /* NSObject+Swizzle.m in Sources */,
-				B659883922E9BDD300E6B531 /* main.mm in Sources */,
-				B659885722E9C1EA00E6B531 /* LogHelper.mm in Sources */,
+				B63DD0BE22EAAAFA0028E3A8 /* MMXlog.m in Sources */,
+				B659883922E9BDD300E6B531 /* main.m in Sources */,
 				B659885E22E9CEA000E6B531 /* UIViewController+Xlog.m in Sources */,
-				B659882B22E9BDD200E6B531 /* AppDelegate.mm in Sources */,
+				B659882B22E9BDD200E6B531 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

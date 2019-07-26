@@ -8,7 +8,7 @@
 
 #import "UIButton+Xlog.h"
 #import "NSObject+Swizzle.h"
-#import "LogUtil.h"
+#import "MMXlog.h"
 
 @implementation UIButton (Xlog)
 
@@ -23,11 +23,11 @@
 {
     if (self.titleLabel.text.length > 0)
     {
-        LOG_INFO("Button", @"%@,%@,%@", self.titleLabel.text, NSStringFromSelector(action), NSStringFromCGRect(self.frame));
+        MMXLOG_DEBUG("Button", @"%@,%@,%@", self.titleLabel.text, NSStringFromSelector(action), NSStringFromCGRect(self.frame));
     }
     else
     {
-        LOG_INFO("Button", @"%@,%@,%@", @"no title", NSStringFromSelector(action), NSStringFromCGRect(self.frame));
+        MMXLOG_INFO("Button", @"%@,%@,%@", @"no title", NSStringFromSelector(action), NSStringFromCGRect(self.frame));
     }
     
     [self xl_sendAction:action to:target forEvent:event];
