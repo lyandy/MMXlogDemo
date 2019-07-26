@@ -24,7 +24,7 @@ NSString *aMessage = [NSString stringWithFormat:@"%@%@", prefix, [NSString strin
 + (void)setConsoleLogEnabled:(BOOL)enabled;
 
 + (void)logWithLevel:(TLogLevel)logLevel moduleName:(const char*)moduleName fileName:(const char*)fileName lineNumber:(int)lineNumber funcName:(const char*)funcName message:(NSString *)message;
-+ (void)logWithLevel:(TLogLevel)logLevel moduleName:(const char*)moduleName fileName:(const char*)fileName lineNumber:(int)lineNumber funcName:(const char*)funcName format:(NSString *)format, ...;
++ (void)logWithLevel:(TLogLevel)logLevel moduleName:(NSString *)moduleName fileName:(const char*)fileName lineNumber:(int)lineNumber funcName:(const char*)funcName format:(NSString *)format, ...;
 
 + (BOOL)shouldLog:(TLogLevel)level;
 

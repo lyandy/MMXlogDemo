@@ -36,7 +36,7 @@ static NSUInteger g_processID = 0;
     appender_open(kAppednerAsync, [logPath UTF8String], "MMXlog", [pub_key UTF8String]);
     
 #if DEBUG
-    [self setLogLevel:kLevelInfo];
+    [self setLogLevel:kLevelDebug];
     [self setConsoleLogEnabled:true];
 #else
     [self setLogLevel:kLevelInfo];

@@ -37,6 +37,9 @@
 #define MMXLOG_SET_CONSOLE_LOG_ENABLED() [MMXlogUtil setConsoleLogEnabled:true]
 #define MMXLOG_SET_CONSOLE_LOG_DISABLED() [MMXlogUtil setConsoleLogEnabled:false]
 
+static const char *kModuleViewController = "ViewController";
+static const char *kNetwork = "Network";
+
 @interface MMXlog : NSObject
 
 @end

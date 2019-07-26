@@ -42,31 +42,31 @@
 #pragma mark - Method Swizzling
 - (void)xl_viewDidLoad
 {
-    MMXLOG_INFO("Page", @"%@-%s",  NSStringFromClass([self class]), __func__);
+    MMXLOG_INFO("Page", @"%@",  @"view加载了");
     [self xl_viewDidLoad];
 }
 
 - (void)xl_viewWillAppear:(BOOL)animated
 {
-    MMXLOG_INFO("Page", @"%@-%s",  NSStringFromClass([self class]), __func__);
+//    MMXLOG_INFO("Page", @"%@-%s",  NSStringFromClass([self class]), __func__);
     [self xl_viewWillAppear:animated];
 }
 
 - (void)xl_viewDidAppear:(BOOL)animated
 {
-    MMXLOG_INFO("Page", @"%@-%s",  NSStringFromClass([self class]), __func__);
+//    MMXLOG_INFO("Page", @"%@-%s",  NSStringFromClass([self class]), __func__);
     [self xl_viewDidAppear:animated];
 }
 
 - (void)xl_viewWillDisappear:(BOOL)animated
 {
-    MMXLOG_INFO("Page", @"%@-%s",  NSStringFromClass([self class]), __func__);
+//    MMXLOG_INFO("Page", @"%@-%s",  NSStringFromClass([self class]), __func__);
     [self xl_viewWillDisappear:animated];
 }
 
 - (void)xl_viewDidDisappear:(BOOL)animated
 {
-    MMXLOG_INFO("Page", @"%@-%s",  NSStringFromClass([self class]), __func__);
+//    MMXLOG_INFO("Page", @"%@-%s",  NSStringFromClass([self class]), __func__);
     [self xl_viewDidDisappear:animated];
 }
 
