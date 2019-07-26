@@ -65,10 +65,10 @@
 				B659885022E9C0EB00E6B531 /* CoreTelephony.framework in Frameworks */,
 				B659884E22E9BECD00E6B531 /* libresolv.9.tbd in Frameworks */,
 				B659884C22E9BEC400E6B531 /* libz.tbd in Frameworks */,
-				B659884A22E9BEBA00E6B531 /* Foundation.framework in Frameworks */,
 				B659884822E9BE9D00E6B531 /* SystemConfiguration.framework in Frameworks */,
-				B659884422E9BE3F00E6B531 /* UIKit.framework in Frameworks */,
 				B659884622E9BE8E00E6B531 /* mars.framework in Frameworks */,
+				B659884422E9BE3F00E6B531 /* UIKit.framework in Frameworks */,
+				B659884A22E9BEBA00E6B531 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

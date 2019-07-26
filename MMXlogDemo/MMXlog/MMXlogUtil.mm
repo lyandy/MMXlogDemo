@@ -24,17 +24,18 @@ static NSUInteger g_processID = 0;
 
 + (void)initLogWithPubKey:(NSString *)pub_key
 {
+    // "MMXlog" xlog 写日志目录
     NSString* logPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingString:@"/MMXlog"];
-    
-    // set do not backup for logpath
     // 禁止 iOS 系统备份此目录
     const char* attrName = "com.apple.MobileBackup";
     u_int8_t attrValue = 1;
     setxattr([logPath UTF8String], attrName, &attrValue, sizeof(attrValue), 0, 0);
     
-    // init xlog
+    // 初始化 xlog：1、初始化控制台打印 2、将 mmap 里的数据会写到日志文件中
+    // kAppednerAsync：异步写入xlog日志，不要使用 kAppednerSync ，可能会造成卡顿
     appender_open(kAppednerAsync, [logPath UTF8String], "MMXlog", [pub_key UTF8String]);
     
+    // 根据不同编译条件设定不同的 TLogLevel 和 是否需要控制台打印日志
 #if DEBUG
     [self setLogLevel:kLevelDebug];
     [self setConsoleLogEnabled:true];
@@ -45,11 +46,13 @@ static NSUInteger g_processID = 0;
     
 }
 
+// 手动设置日志打印级别
 + (void)setLogLevel:(TLogLevel)level
 {
     xlogger_SetLevel(level);
 }
 
+// 手动设置控制台是否打印xlog日志
 + (void)setConsoleLogEnabled:(BOOL)enabled
 {
     appender_set_console_log(enabled);
@@ -57,17 +60,17 @@ static NSUInteger g_processID = 0;
 
 + (void)logWithLevel:(TLogLevel)logLevel moduleName:(const char*)moduleName fileName:(const char*)fileName lineNumber:(int)lineNumber funcName:(const char*)funcName message:(NSString *)message {
     XLoggerInfo info;
-    info.level = logLevel;
-    info.tag = moduleName;
-    info.filename = fileName;
-    info.func_name = funcName;
-    info.line = lineNumber;
-    gettimeofday(&info.timeval, NULL);
+    info.level = logLevel; // xlog level
+    info.tag = moduleName; // 模块业务名称
+    info.filename = fileName; // 文件名称
+    info.func_name = funcName; // 方法名称
+    info.line = lineNumber; // 代码行
+    gettimeofday(&info.timeval, NULL); // 当前时间
     info.tid = (uintptr_t)[NSThread currentThread];
     info.maintid = (uintptr_t)[NSThread mainThread];
     info.pid = g_processID;
-    xlogger_Write(&info, message.UTF8String);
-    appender_flush();
+    xlogger_Write(&info, message.UTF8String); // 记录 xlog 日志
+    appender_flush(); // 异步将 mmap 中的数据回写到文件中, 不要使用 同步appender_flush_sync()， 可能会造成卡顿
 }
 
 + (void)logWithLevel:(TLogLevel)logLevel moduleName:(const char*)moduleName fileName:(const char*)fileName lineNumber:(int)lineNumber funcName:(const char*)funcName format:(NSString *)format, ... {
@@ -80,8 +83,9 @@ static NSUInteger g_processID = 0;
     }
 }
 
+// 判断当前 TLogLevel 是否满足日志记录条件
 + (BOOL)shouldLog:(TLogLevel)level {
-    
+
     if (level >= xlogger_Level()) {
         return YES;
     }
@@ -89,6 +93,7 @@ static NSUInteger g_processID = 0;
     return NO;
 }
 
+// xlog s初始化
 + (void)appender_close
 {
     appender_close();
