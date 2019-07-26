@@ -22,9 +22,6 @@
 		B659884C22E9BEC400E6B531 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B659884B22E9BEC400E6B531 /* libz.tbd */; };
 		B659884E22E9BECD00E6B531 /* libresolv.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B659884D22E9BECD00E6B531 /* libresolv.9.tbd */; };
 		B659885022E9C0EB00E6B531 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B659884F22E9C0EB00E6B531 /* CoreTelephony.framework */; };
-		B659885B22E9CE8E00E6B531 /* UIButton+Xlog.m in Sources */ = {isa = PBXBuildFile; fileRef = B659885A22E9CE8E00E6B531 /* UIButton+Xlog.m */; };
-		B659885E22E9CEA000E6B531 /* UIViewController+Xlog.m in Sources */ = {isa = PBXBuildFile; fileRef = B659885D22E9CEA000E6B531 /* UIViewController+Xlog.m */; };
-		B659886622E9CFC900E6B531 /* NSObject+Swizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = B659886522E9CFC900E6B531 /* NSObject+Swizzle.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,12 +46,6 @@
 		B659884B22E9BEC400E6B531 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		B659884D22E9BECD00E6B531 /* libresolv.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.9.tbd; path = usr/lib/libresolv.9.tbd; sourceTree = SDKROOT; };
 		B659884F22E9C0EB00E6B531 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
-		B659885922E9CE8E00E6B531 /* UIButton+Xlog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+Xlog.h"; sourceTree = "<group>"; };
-		B659885A22E9CE8E00E6B531 /* UIButton+Xlog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Xlog.m"; sourceTree = "<group>"; };
-		B659885C22E9CEA000E6B531 /* UIViewController+Xlog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Xlog.h"; sourceTree = "<group>"; };
-		B659885D22E9CEA000E6B531 /* UIViewController+Xlog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Xlog.m"; sourceTree = "<group>"; };
-		B659886422E9CFC900E6B531 /* NSObject+Swizzle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+Swizzle.h"; sourceTree = "<group>"; };
-		B659886522E9CFC900E6B531 /* NSObject+Swizzle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Swizzle.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +98,6 @@
 			isa = PBXGroup;
 			children = (
 				B63DD0BB22EAA9900028E3A8 /* MMXlog */,
-				B659885822E9C3BC00E6B531 /* Category */,
 				B659882922E9BDD200E6B531 /* AppDelegate.h */,
 				B659882A22E9BDD200E6B531 /* AppDelegate.m */,
 				B659882C22E9BDD200E6B531 /* ViewController.h */,
@@ -133,19 +123,6 @@
 				B659884322E9BE3F00E6B531 /* UIKit.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		B659885822E9C3BC00E6B531 /* Category */ = {
-			isa = PBXGroup;
-			children = (
-				B659885922E9CE8E00E6B531 /* UIButton+Xlog.h */,
-				B659885A22E9CE8E00E6B531 /* UIButton+Xlog.m */,
-				B659885C22E9CEA000E6B531 /* UIViewController+Xlog.h */,
-				B659885D22E9CEA000E6B531 /* UIViewController+Xlog.m */,
-				B659886422E9CFC900E6B531 /* NSObject+Swizzle.h */,
-				B659886522E9CFC900E6B531 /* NSObject+Swizzle.m */,
-			);
-			path = Category;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -218,13 +195,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B659885B22E9CE8E00E6B531 /* UIButton+Xlog.m in Sources */,
 				B659882E22E9BDD200E6B531 /* ViewController.m in Sources */,
 				B63DD0C122EAAB370028E3A8 /* MMXlogUtil.mm in Sources */,
-				B659886622E9CFC900E6B531 /* NSObject+Swizzle.m in Sources */,
 				B63DD0BE22EAAAFA0028E3A8 /* MMXlog.m in Sources */,
 				B659883922E9BDD300E6B531 /* main.m in Sources */,
-				B659885E22E9CEA000E6B531 /* UIViewController+Xlog.m in Sources */,
 				B659882B22E9BDD200E6B531 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -43,7 +43,7 @@
 
 // 示例m Module
 static const char *kModuleViewController = "ViewController";
-static const char *kNetwork = "Network";
+static const char *kModuleNetwork = "Network";
 
 @interface MMXlog : NSObject
 

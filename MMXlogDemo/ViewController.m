@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "MMXlog.h"
 
 @interface ViewController ()
 
@@ -16,12 +17,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    // 页面加载 kLevelInfo 级别
+    MMXLOG_INFO(kModuleViewController, @"页面加载");
 }
 
 - (IBAction)btnClicked:(UIButton *)sender
 {
-    NSLog(@"----> %s", __func__);
+    // 模拟记录日志请求 kLevelDebug 级别
+    MMXLOG_DEBUG(kModuleNetwork, @"网络请求");
 }
 
 

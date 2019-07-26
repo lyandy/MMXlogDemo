@@ -99,5 +99,4 @@ static NSUInteger g_processID = 0;
     appender_close();
 }
 
-
 @end
