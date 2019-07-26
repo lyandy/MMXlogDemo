@@ -16,7 +16,6 @@ int main(int argc, char * argv[]) {
     @autoreleasepool {
         
         MMXLOG_INIT();
-        MMXLOG_SET_LOG_LEVEL_INFO();
         
         return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
     }

@@ -23,7 +23,7 @@
 {
     if (self.titleLabel.text.length > 0)
     {
-        MMXLOG_DEBUG("Button", @"%@,%@,%@", self.titleLabel.text, NSStringFromSelector(action), NSStringFromCGRect(self.frame));
+        MMXLOG_INFO("Button", @"%@,%@,%@", self.titleLabel.text, NSStringFromSelector(action), NSStringFromCGRect(self.frame));
     }
     else
     {
