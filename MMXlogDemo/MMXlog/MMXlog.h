@@ -41,6 +41,10 @@
 #define MMXLOG_SET_CONSOLE_LOG_ENABLED() [MMXlogUtil setConsoleLogEnabled:true]
 #define MMXLOG_SET_CONSOLE_LOG_DISABLED() [MMXlogUtil setConsoleLogEnabled:false]
 
+#define MMXLOG_CURRENT_DATE() [MMXlogUtil currentDate]
+
+extern void uploadFilePath(NSString *date, filePathBlock block);
+
 // 示例m Module
 static const char *kModuleViewController = "ViewController";
 static const char *kModuleNetwork = "Network";

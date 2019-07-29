@@ -15,7 +15,7 @@
 int main(int argc, char * argv[]) {
     @autoreleasepool {
         
-        MMXLOG_INIT();
+        MMXLOG_INIT(); // 初始化 Xlog
         
         return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
     }

@@ -16,6 +16,8 @@ NSString *aMessage = [NSString stringWithFormat:@"%@%@", prefix, [NSString strin
 [MMXlogUtil logWithLevel:level moduleName:module fileName:file lineNumber:line funcName:func message:aMessage]; \
 } \
 
+typedef void (^filePathBlock)(NSString *_Nullable filePath);
+
 @interface MMXlogUtil : NSObject
 
 // 初始化xlog，不带加密 pub_key
@@ -35,8 +37,11 @@ NSString *aMessage = [NSString stringWithFormat:@"%@%@", prefix, [NSString strin
 // 根据传入的 TLogLevel 来控制不同level记录，比如传入的 TLogLevel 为 kLevelInfo，则 kLevelDebug 级别的不会打印和记录
 + (BOOL)shouldLog:(TLogLevel)level;
 
++ (void)uploadFilePathWithName:(NSString *)date block:(filePathBlock)block;
 
 // 关闭日志记录，在程序退出的时候调用
 + (void)appender_close;
+
++ (NSString *)currentDate;
 
 @end

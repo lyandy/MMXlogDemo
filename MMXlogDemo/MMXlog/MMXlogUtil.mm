@@ -25,7 +25,7 @@ static NSUInteger g_processID = 0;
 + (void)initLogWithPubKey:(NSString *)pub_key
 {
     // "MMXlog" xlog 写日志目录
-    NSString* logPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingString:@"/MMXlog"];
+    NSString* logPath = [self loganLogDirectory];
     // 禁止 iOS 系统备份此目录
     const char* attrName = "com.apple.MobileBackup";
     u_int8_t attrValue = 1;
@@ -83,6 +83,70 @@ static NSUInteger g_processID = 0;
     }
 }
 
++ (NSString *)logFilePath:(NSString *)date {
+    return [[self loganLogDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", date]];
+}
+
++ (void)uploadFilePathWithName:(NSString *)date block:(filePathBlock)block
+{
+    NSString *uploadFilePath = nil;
+    NSString *filePath = nil;
+    if (date.length)
+    {
+        NSArray *allFiles = [self localFilesArray];
+        if ([allFiles containsObject:date]) {
+            filePath = [self logFilePath:date];
+            if ([[NSFileManager defaultManager] fileExistsAtPath:filePath])
+            {
+                uploadFilePath = filePath;
+            }
+        }
+    }
+    
+    if (uploadFilePath.length) {
+        if ([date isEqualToString:[self currentDate]]) {
+                [self todayFilePatch:block];
+            return;
+        }
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        filePathBlock(uploadFilePath);
+    });
+}
+
++ (void)todayFilePatch:(filePathBlock)filePathBlock {
+    appender_flush();
+    NSString *uploadFilePath = [self uploadFilePath:[self currentDate]];
+    NSString *filePath = [self logFilePath:[self currentDate]];
+    NSError *error;
+    [[NSFileManager defaultManager] removeItemAtPath:uploadFilePath error:&error];
+    if (![[NSFileManager defaultManager] copyItemAtPath:filePath toPath:uploadFilePath error:&error]) {
+        uploadFilePath = nil;
+    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        filePathBlock(uploadFilePath);
+    });
+}
+
++ (NSArray *)localFilesArray {
+    return [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self loganLogDirectory] error:nil]; //[c]不区分大小写 , [d]不区分发音符号即没有重音符号 , [cd]既不区分大小写，也不区分发音符号。
+}
+
++ (NSString *)loganLogDirectory {
+    static NSString *dir = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        dir = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingString:@"/MMXlog"];
+    });
+    return dir;
+}
+
++ (NSString *)uploadFilePath:(NSString *)date {
+    return [[self loganLogDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.temp", date]];
+}
+
+
 // 判断当前 TLogLevel 是否满足日志记录条件
 + (BOOL)shouldLog:(TLogLevel)level {
 
@@ -97,6 +161,24 @@ static NSUInteger g_processID = 0;
 + (void)appender_close
 {
     appender_close();
+}
+
++ (NSString *)currentDate
+{
+    NSString *key = @"XLOG_CURRENTDATE";
+    NSMutableDictionary *dictionary = [[NSThread currentThread] threadDictionary];
+    NSDateFormatter *dateFormatter = [dictionary objectForKey:key];
+    if (!dateFormatter)
+    {
+        dateFormatter = [[NSDateFormatter alloc] init];
+        [dictionary setObject:dateFormatter forKey:key];
+        [dateFormatter setLocale:[NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"]];
+        [dateFormatter setDateFormat:@"yyyyMMdd"];
+        [dictionary setObject:dateFormatter forKey:key];
+    }
+    NSString *date = [dateFormatter stringFromDate:[NSDate new]];
+    date = [[@"MMXlog_" stringByAppendingString:date] stringByAppendingString:@".xlog"];
+    return date;
 }
 
 @end

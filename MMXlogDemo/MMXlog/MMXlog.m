@@ -8,6 +8,11 @@
 
 #import "MMXlog.h"
 
+void uploadFilePath(NSString *date, filePathBlock block)
+{
+    [MMXlogUtil uploadFilePathWithName:date block:block];
+}
+
 @implementation MMXlog
 
 @end
