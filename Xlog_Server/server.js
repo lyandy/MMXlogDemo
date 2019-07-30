@@ -37,18 +37,20 @@ app.get('/', (req, res) => {
 });
 
 app.post('/logupload', (req, res) => {
-  console.log('Logan client upload log file');
+  console.log('Xlog client upload log file');
   if (!req.body) {
     return res.sendStatus(400);
   }
   var filename = req.query.name;
-  console.log(filename);
+  console.log('\nfilename:' + filename);
   var writeStram = fs.createWriteStream(filename);
   writeStram.write(req.body);
   writeStram.end();
+  console.log('\nstart decode file:' + filename);
   process.exec('python decode_mars_nocrypt_log_file.py');
+  console.log('decode log file complete');
   // haha
   res.json({ success: true });
 });
 
-app.listen(4000, () => console.log('Logan demo server listening on port 4000!'));
+app.listen(4000, () => console.log('Xlog demo server listening on port 4000!'));
