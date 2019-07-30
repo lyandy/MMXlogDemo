@@ -41,8 +41,9 @@ app.post('/logupload', (req, res) => {
   if (!req.body) {
     return res.sendStatus(400);
   }
-
-  var writeStram = fs.createWriteStream('MMXlog_20190729.xlog');
+  var filename = req.query.name;
+  console.log(filename);
+  var writeStram = fs.createWriteStream(filename);
   writeStram.write(req.body);
   writeStram.end();
   process.exec('python decode_mars_nocrypt_log_file.py');

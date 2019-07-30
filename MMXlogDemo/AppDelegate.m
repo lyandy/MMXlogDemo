@@ -51,7 +51,7 @@
 
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    MMXLOG_APPENDER_CLOSE();
+    MMXLOG_APPENDER_CLOSE(); // 结束日志记录
 }
 
 

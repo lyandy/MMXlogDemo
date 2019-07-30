@@ -13,12 +13,21 @@
 #define LogInternal(level, module, file, line, func, prefix, format, ...) \
 if ([MMXlogUtil shouldLog:level]) { \
 NSString *aMessage = [NSString stringWithFormat:@"%@%@", prefix, [NSString stringWithFormat:format, ##__VA_ARGS__, nil]]; \
-[MMXlogUtil logWithLevel:level moduleName:module fileName:file lineNumber:line funcName:func message:aMessage]; \
+[[MMXlogUtil sharedUtil] logWithLevel:level moduleName:module fileName:file lineNumber:line funcName:func message:aMessage]; \
 } \
 
 typedef void (^filePathBlock)(NSString *_Nullable filePath);
 
+
 @interface MMXlogUtil : NSObject
+
++ (instancetype)sharedUtil;
+
+#if OS_OBJECT_USE_OBJC
+@property (nonatomic, strong) dispatch_queue_t xlogQueue;
+#else
+@property (nonatomic, assign) dispatch_queue_t xlogQueue;
+#endif
 
 // 初始化xlog，不带加密 pub_key
 + (void)initLog;
@@ -31,17 +40,16 @@ typedef void (^filePathBlock)(NSString *_Nullable filePath);
 + (void)setConsoleLogEnabled:(BOOL)enabled;
 
 // 日志打印oc封装方法
-+ (void)logWithLevel:(TLogLevel)logLevel moduleName:(const char*)moduleName fileName:(const char*)fileName lineNumber:(int)lineNumber funcName:(const char*)funcName message:(NSString *)message;
-+ (void)logWithLevel:(TLogLevel)logLevel moduleName:(const char*)moduleName fileName:(const char*)fileName lineNumber:(int)lineNumber funcName:(const char*)funcName format:(NSString *)format, ...;
+- (void)logWithLevel:(TLogLevel)logLevel moduleName:(const char*)moduleName fileName:(const char*)fileName lineNumber:(int)lineNumber funcName:(const char*)funcName message:(NSString *)message;
+- (void)logWithLevel:(TLogLevel)logLevel moduleName:(const char*)moduleName fileName:(const char*)fileName lineNumber:(int)lineNumber funcName:(const char*)funcName format:(NSString *)format, ...;
 
 // 根据传入的 TLogLevel 来控制不同level记录，比如传入的 TLogLevel 为 kLevelInfo，则 kLevelDebug 级别的不会打印和记录
 + (BOOL)shouldLog:(TLogLevel)level;
 
-+ (void)uploadFilePathWithName:(NSString *)date block:(filePathBlock)block;
++ (void)uploadXlogFile;
 
 // 关闭日志记录，在程序退出的时候调用
 + (void)appender_close;
 
-+ (NSString *)currentDate;
 
 @end
