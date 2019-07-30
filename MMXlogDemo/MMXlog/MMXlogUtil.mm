@@ -261,14 +261,18 @@ static NSString *__xlog_upload_dir; // 日志上传文件夹
 
 + (unsigned long long)fileSizeAtPath:(NSString *)filePath
 {
-    if (filePath.length == 0) {
+    if (filePath.length == 0)
+    {
         return 0;
     }
     NSFileManager *fileManager = [NSFileManager defaultManager];
     BOOL isExist = [fileManager fileExistsAtPath:filePath];
-    if (isExist) {
+    if (isExist)
+    {
         return [[fileManager attributesOfItemAtPath:filePath error:nil] fileSize];
-    } else {
+    }
+    else
+    {
         return 0;
     }
 }
@@ -352,7 +356,7 @@ static NSString *__xlog_upload_dir; // 日志上传文件夹
 
 + (NSString *)currentDate
 {
-    NSString *key = @"XLOGCURRENTDATE";
+    NSString *key = @"XLOG_CURRENTDATE";
     NSMutableDictionary *dictionary = [[NSThread currentThread] threadDictionary];
     NSDateFormatter *dateFormatter = [dictionary objectForKey:key];
     if (!dateFormatter)

@@ -41,7 +41,9 @@
 #define MMXLOG_SET_CONSOLE_LOG_ENABLED() [MMXlogUtil setConsoleLogEnabled:true]
 #define MMXLOG_SET_CONSOLE_LOG_DISABLED() [MMXlogUtil setConsoleLogEnabled:false]
 
+// 日志上传
 #define MMXLOG_UPLOAD_XLOG_FILE() [MMXlogUtil uploadXlogFile]
+// 获取日志信息
 #define MMXLOG_ALL_XLOG_FILES_INFO() [MMXlogUtil allFilesInfo]
 
 // 示例 Module
