@@ -1,0 +1,550 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		06091D1E165B9EB0C877E18AA29ACC39 /* AndyGCD.h in Headers */ = {isa = PBXBuildFile; fileRef = 68C927762337C8CF6697D2DCBE96C9EC /* AndyGCD.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		0D84E1EB7FDEE9924B959885E74E5F6F /* AndyGCD-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 86DB25571FEF6B4E02D184EEF090C53A /* AndyGCD-dummy.m */; };
+		15AB5B90387FE533F7FA01F691B9BC30 /* AndyGCDQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A1952B8386CFA6E8EAF13BA664EE967 /* AndyGCDQueue.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		1BCB981A67E612CACC65908A3DAD2118 /* AndySafeThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AFB9AB19CE4E14C54E7387660343D39 /* AndySafeThread.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		22BC7C524D0664EE99D6A7BA12376C2C /* AndyGCDConst.m in Sources */ = {isa = PBXBuildFile; fileRef = EB6C7B87AAEA584C017B375A38248EFD /* AndyGCDConst.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		4B15D41FCF8A9E8B246FCB4AD30ACD6A /* AndyLifeFreedomThread.h in Headers */ = {isa = PBXBuildFile; fileRef = 202D0EF5E2C572031A76D8EE870B4DB9 /* AndyLifeFreedomThread.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		506BF74F365A225FA7A96437609CC870 /* AndySafeThread.h in Headers */ = {isa = PBXBuildFile; fileRef = A1F8258E2DAFF9B9352EA6D0F2F8B51F /* AndySafeThread.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		62552C8ACBE07E58C58DD1CD521AAD8F /* AndyGCDSemaphore.h in Headers */ = {isa = PBXBuildFile; fileRef = D357E5762177649337198C2A2B3905C0 /* AndyGCDSemaphore.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		6319027C0B01028CDCB57F00B403A85B /* AndyLifeFreedomThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA5DF7A6F3D8AAC21BAE60618906C9B /* AndyLifeFreedomThread.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		784BDC5806C62F314E12293FDB835854 /* AndyGCDTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AE2E4EB0433EEDFAB198D22E0185F83 /* AndyGCDTimer.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		7B6719D685F6DFAF720655893B2ED077 /* AndyGCDQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A596E9A412D10891D466D995611A1F /* AndyGCDQueue.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		7D8F8887FE5C7BE0D82F77A9AA226631 /* AndyGCDGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 754E00DC728E27E9D6A32B02B9BEA897 /* AndyGCDGroup.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		86AEF7774ED305E2EB98B8A68F04004A /* Pods-MMXlogDemo-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C4CCA5574FD8EEAEA674E82B325A65C1 /* Pods-MMXlogDemo-dummy.m */; };
+		954CF2A258989C9075ED14E0D4A48120 /* AndyGCDSemaphore.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B086242E11ADA905DB44742E07FA48 /* AndyGCDSemaphore.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		B1C6225016423249DEE4270E1C415CDD /* AndyGCDTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = E8826063684C948D63AF088AA5F3AA22 /* AndyGCDTimer.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		C7B58D901EECDECA99A6E82DFCB72E0F /* AndyGCDConst.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5DC56AA11ACD149394BE7AB455ACA8 /* AndyGCDConst.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		E50F89AACF248235899F3843A3EE563D /* AndyGCDGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D49345DF176263938DCD9D275D17C92 /* AndyGCDGroup.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2632C2A18570FFBCCFFB003017371585 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 632BCC1AEC6EAA1BC868093193A7710C;
+			remoteInfo = AndyGCD;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0D49345DF176263938DCD9D275D17C92 /* AndyGCDGroup.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AndyGCDGroup.m; path = AndyGCD/AndyGCDGroup.m; sourceTree = "<group>"; };
+		0F20C68D9C94AD083190869836BDEA81 /* Pods-MMXlogDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MMXlogDemo.release.xcconfig"; sourceTree = "<group>"; };
+		1A1952B8386CFA6E8EAF13BA664EE967 /* AndyGCDQueue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AndyGCDQueue.h; path = AndyGCD/AndyGCDQueue.h; sourceTree = "<group>"; };
+		1A5DC56AA11ACD149394BE7AB455ACA8 /* AndyGCDConst.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AndyGCDConst.h; path = AndyGCD/AndyGCDConst.h; sourceTree = "<group>"; };
+		202D0EF5E2C572031A76D8EE870B4DB9 /* AndyLifeFreedomThread.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AndyLifeFreedomThread.h; path = AndyGCD/AndyLifeFreedomThread.h; sourceTree = "<group>"; };
+		23835709F707167B306972D33664820D /* Pods-MMXlogDemo-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-MMXlogDemo-acknowledgements.markdown"; sourceTree = "<group>"; };
+		24A596E9A412D10891D466D995611A1F /* AndyGCDQueue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AndyGCDQueue.m; path = AndyGCD/AndyGCDQueue.m; sourceTree = "<group>"; };
+		29B086242E11ADA905DB44742E07FA48 /* AndyGCDSemaphore.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AndyGCDSemaphore.m; path = AndyGCD/AndyGCDSemaphore.m; sourceTree = "<group>"; };
+		4CA5DF7A6F3D8AAC21BAE60618906C9B /* AndyLifeFreedomThread.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AndyLifeFreedomThread.m; path = AndyGCD/AndyLifeFreedomThread.m; sourceTree = "<group>"; };
+		5C4C7A7F744F5F0A7068872B2ACF3DCA /* Pods-MMXlogDemo-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MMXlogDemo-acknowledgements.plist"; sourceTree = "<group>"; };
+		68C927762337C8CF6697D2DCBE96C9EC /* AndyGCD.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AndyGCD.h; path = AndyGCD/AndyGCD.h; sourceTree = "<group>"; };
+		754E00DC728E27E9D6A32B02B9BEA897 /* AndyGCDGroup.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AndyGCDGroup.h; path = AndyGCD/AndyGCDGroup.h; sourceTree = "<group>"; };
+		7AE2E4EB0433EEDFAB198D22E0185F83 /* AndyGCDTimer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AndyGCDTimer.m; path = AndyGCD/AndyGCDTimer.m; sourceTree = "<group>"; };
+		7AFB9AB19CE4E14C54E7387660343D39 /* AndySafeThread.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AndySafeThread.m; path = AndyGCD/AndySafeThread.m; sourceTree = "<group>"; };
+		86DB25571FEF6B4E02D184EEF090C53A /* AndyGCD-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "AndyGCD-dummy.m"; sourceTree = "<group>"; };
+		96F625629046C682433341528784936F /* AndyGCD-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AndyGCD-prefix.pch"; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A1F8258E2DAFF9B9352EA6D0F2F8B51F /* AndySafeThread.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AndySafeThread.h; path = AndyGCD/AndySafeThread.h; sourceTree = "<group>"; };
+		A74655DF484E330D442425F0A732CB86 /* libAndyGCD.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libAndyGCD.a; path = libAndyGCD.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B92B1E9C18785D472E65E99885F19FAE /* Pods-MMXlogDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MMXlogDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		C4CCA5574FD8EEAEA674E82B325A65C1 /* Pods-MMXlogDemo-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-MMXlogDemo-dummy.m"; sourceTree = "<group>"; };
+		D357E5762177649337198C2A2B3905C0 /* AndyGCDSemaphore.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AndyGCDSemaphore.h; path = AndyGCD/AndyGCDSemaphore.h; sourceTree = "<group>"; };
+		D7F8D05C5A1DC0A84259EB410EAEA51E /* AndyGCD.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = AndyGCD.xcconfig; sourceTree = "<group>"; };
+		E8826063684C948D63AF088AA5F3AA22 /* AndyGCDTimer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AndyGCDTimer.h; path = AndyGCD/AndyGCDTimer.h; sourceTree = "<group>"; };
+		EB6C7B87AAEA584C017B375A38248EFD /* AndyGCDConst.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AndyGCDConst.m; path = AndyGCD/AndyGCDConst.m; sourceTree = "<group>"; };
+		F4040496D4F450B299DF42229A752635 /* libPods-MMXlogDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-MMXlogDemo.a"; path = "libPods-MMXlogDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		10B11A9628FF492A47B139D282288203 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED0D0EF6337D4F06CD5A6DE12ECF887D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		76B4DC6675C216B917B68B5D4D928045 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A7418140AA46BA5E8952B814AACC9ABC /* AndyGCD */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		7EB98F69D452DF78F63808D913F389E5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A74655DF484E330D442425F0A732CB86 /* libAndyGCD.a */,
+				F4040496D4F450B299DF42229A752635 /* libPods-MMXlogDemo.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8C07477EF6253561E7DA2E607586F865 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				BC60F62648422DD83362093205E8E85E /* Pods-MMXlogDemo */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		96B88DE57C519FC9BB7B45B61A6F2F5F /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				D7F8D05C5A1DC0A84259EB410EAEA51E /* AndyGCD.xcconfig */,
+				86DB25571FEF6B4E02D184EEF090C53A /* AndyGCD-dummy.m */,
+				96F625629046C682433341528784936F /* AndyGCD-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/AndyGCD";
+			sourceTree = "<group>";
+		};
+		A7418140AA46BA5E8952B814AACC9ABC /* AndyGCD */ = {
+			isa = PBXGroup;
+			children = (
+				68C927762337C8CF6697D2DCBE96C9EC /* AndyGCD.h */,
+				1A5DC56AA11ACD149394BE7AB455ACA8 /* AndyGCDConst.h */,
+				EB6C7B87AAEA584C017B375A38248EFD /* AndyGCDConst.m */,
+				754E00DC728E27E9D6A32B02B9BEA897 /* AndyGCDGroup.h */,
+				0D49345DF176263938DCD9D275D17C92 /* AndyGCDGroup.m */,
+				1A1952B8386CFA6E8EAF13BA664EE967 /* AndyGCDQueue.h */,
+				24A596E9A412D10891D466D995611A1F /* AndyGCDQueue.m */,
+				D357E5762177649337198C2A2B3905C0 /* AndyGCDSemaphore.h */,
+				29B086242E11ADA905DB44742E07FA48 /* AndyGCDSemaphore.m */,
+				E8826063684C948D63AF088AA5F3AA22 /* AndyGCDTimer.h */,
+				7AE2E4EB0433EEDFAB198D22E0185F83 /* AndyGCDTimer.m */,
+				202D0EF5E2C572031A76D8EE870B4DB9 /* AndyLifeFreedomThread.h */,
+				4CA5DF7A6F3D8AAC21BAE60618906C9B /* AndyLifeFreedomThread.m */,
+				A1F8258E2DAFF9B9352EA6D0F2F8B51F /* AndySafeThread.h */,
+				7AFB9AB19CE4E14C54E7387660343D39 /* AndySafeThread.m */,
+				96B88DE57C519FC9BB7B45B61A6F2F5F /* Support Files */,
+			);
+			name = AndyGCD;
+			path = AndyGCD;
+			sourceTree = "<group>";
+		};
+		BC60F62648422DD83362093205E8E85E /* Pods-MMXlogDemo */ = {
+			isa = PBXGroup;
+			children = (
+				23835709F707167B306972D33664820D /* Pods-MMXlogDemo-acknowledgements.markdown */,
+				5C4C7A7F744F5F0A7068872B2ACF3DCA /* Pods-MMXlogDemo-acknowledgements.plist */,
+				C4CCA5574FD8EEAEA674E82B325A65C1 /* Pods-MMXlogDemo-dummy.m */,
+				B92B1E9C18785D472E65E99885F19FAE /* Pods-MMXlogDemo.debug.xcconfig */,
+				0F20C68D9C94AD083190869836BDEA81 /* Pods-MMXlogDemo.release.xcconfig */,
+			);
+			name = "Pods-MMXlogDemo";
+			path = "Target Support Files/Pods-MMXlogDemo";
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				D89477F20FB1DE18A04690586D7808C4 /* Frameworks */,
+				76B4DC6675C216B917B68B5D4D928045 /* Pods */,
+				7EB98F69D452DF78F63808D913F389E5 /* Products */,
+				8C07477EF6253561E7DA2E607586F865 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		D89477F20FB1DE18A04690586D7808C4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		548A1BF08D0B1801A29AA66F0D461C77 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				06091D1E165B9EB0C877E18AA29ACC39 /* AndyGCD.h in Headers */,
+				C7B58D901EECDECA99A6E82DFCB72E0F /* AndyGCDConst.h in Headers */,
+				7D8F8887FE5C7BE0D82F77A9AA226631 /* AndyGCDGroup.h in Headers */,
+				15AB5B90387FE533F7FA01F691B9BC30 /* AndyGCDQueue.h in Headers */,
+				62552C8ACBE07E58C58DD1CD521AAD8F /* AndyGCDSemaphore.h in Headers */,
+				B1C6225016423249DEE4270E1C415CDD /* AndyGCDTimer.h in Headers */,
+				4B15D41FCF8A9E8B246FCB4AD30ACD6A /* AndyLifeFreedomThread.h in Headers */,
+				506BF74F365A225FA7A96437609CC870 /* AndySafeThread.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A292D6C9112321E3F71C182BDDC53A17 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		3965703D68485CD4FE30091A36A5ECA2 /* Pods-MMXlogDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5E6D6844CDFB9602F3627B71B413B909 /* Build configuration list for PBXNativeTarget "Pods-MMXlogDemo" */;
+			buildPhases = (
+				A292D6C9112321E3F71C182BDDC53A17 /* Headers */,
+				F7ACF6E0932260B8052CA6FC158992E5 /* Sources */,
+				ED0D0EF6337D4F06CD5A6DE12ECF887D /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				00D73294F70ACFFF6FFF1D0292373E8A /* PBXTargetDependency */,
+			);
+			name = "Pods-MMXlogDemo";
+			productName = "Pods-MMXlogDemo";
+			productReference = F4040496D4F450B299DF42229A752635 /* libPods-MMXlogDemo.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		632BCC1AEC6EAA1BC868093193A7710C /* AndyGCD */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 711E64EE808D5DCDAADA614941A75835 /* Build configuration list for PBXNativeTarget "AndyGCD" */;
+			buildPhases = (
+				548A1BF08D0B1801A29AA66F0D461C77 /* Headers */,
+				5FD089DF1393F0C44D7A80CDFA28E26A /* Sources */,
+				10B11A9628FF492A47B139D282288203 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AndyGCD;
+			productName = AndyGCD;
+			productReference = A74655DF484E330D442425F0A732CB86 /* libAndyGCD.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1100;
+				LastUpgradeCheck = 1100;
+			};
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = 7EB98F69D452DF78F63808D913F389E5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				632BCC1AEC6EAA1BC868093193A7710C /* AndyGCD */,
+				3965703D68485CD4FE30091A36A5ECA2 /* Pods-MMXlogDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5FD089DF1393F0C44D7A80CDFA28E26A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D84E1EB7FDEE9924B959885E74E5F6F /* AndyGCD-dummy.m in Sources */,
+				22BC7C524D0664EE99D6A7BA12376C2C /* AndyGCDConst.m in Sources */,
+				E50F89AACF248235899F3843A3EE563D /* AndyGCDGroup.m in Sources */,
+				7B6719D685F6DFAF720655893B2ED077 /* AndyGCDQueue.m in Sources */,
+				954CF2A258989C9075ED14E0D4A48120 /* AndyGCDSemaphore.m in Sources */,
+				784BDC5806C62F314E12293FDB835854 /* AndyGCDTimer.m in Sources */,
+				6319027C0B01028CDCB57F00B403A85B /* AndyLifeFreedomThread.m in Sources */,
+				1BCB981A67E612CACC65908A3DAD2118 /* AndySafeThread.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F7ACF6E0932260B8052CA6FC158992E5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				86AEF7774ED305E2EB98B8A68F04004A /* Pods-MMXlogDemo-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		00D73294F70ACFFF6FFF1D0292373E8A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AndyGCD;
+			target = 632BCC1AEC6EAA1BC868093193A7710C /* AndyGCD */;
+			targetProxy = 2632C2A18570FFBCCFFB003017371585 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		06A7A3095175499B9F5621229F75ED96 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D7F8D05C5A1DC0A84259EB410EAEA51E /* AndyGCD.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/AndyGCD/AndyGCD-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = AndyGCD;
+				PRODUCT_NAME = AndyGCD;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		40F2B69F956C119F63BBB4C066AB3553 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F20C68D9C94AD083190869836BDEA81 /* Pods-MMXlogDemo.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		89D51F92BBF4F2DEE9C9CB810E231439 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D7F8D05C5A1DC0A84259EB410EAEA51E /* AndyGCD.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/AndyGCD/AndyGCD-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = AndyGCD;
+				PRODUCT_NAME = AndyGCD;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8F17DC3A99F99FBAD606CE6963886315 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		916E0404255105F480DC4950B7625F7A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		ABE6B2FAC1A3F3DDB9CAF97D1962045A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B92B1E9C18785D472E65E99885F19FAE /* Pods-MMXlogDemo.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				916E0404255105F480DC4950B7625F7A /* Debug */,
+				8F17DC3A99F99FBAD606CE6963886315 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5E6D6844CDFB9602F3627B71B413B909 /* Build configuration list for PBXNativeTarget "Pods-MMXlogDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABE6B2FAC1A3F3DDB9CAF97D1962045A /* Debug */,
+				40F2B69F956C119F63BBB4C066AB3553 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		711E64EE808D5DCDAADA614941A75835 /* Build configuration list for PBXNativeTarget "AndyGCD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				06A7A3095175499B9F5621229F75ED96 /* Debug */,
+				89D51F92BBF4F2DEE9C9CB810E231439 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+}

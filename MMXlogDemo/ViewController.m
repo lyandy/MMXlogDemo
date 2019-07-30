@@ -11,6 +11,9 @@
 
 @interface ViewController ()
 
+@property (nonatomic, assign) int count;
+@property (weak, nonatomic) IBOutlet UITextView *filesInfo;
+
 @end
 
 @implementation ViewController
@@ -24,7 +27,13 @@
 - (IBAction)btnClicked:(UIButton *)sender
 {
     // 模拟记录日志请求 kLevelDebug 级别
-    MMXLOG_DEBUG(kModuleNetwork, @"网络请求");
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        for (int i = 0; i < 10000; i++) {
+            //行为日志
+            usleep(500000);
+            MMXLOG_DEBUG(kModuleNetwork, [NSString stringWithFormat:@"网络请求 %d", self->_count++]);
+        }
+    });
 }
 
 - (IBAction)uploadClicked:(UIButton *)sender
@@ -32,4 +41,9 @@
     MMXLOG_UPLOAD_XLOG_FILE();
 }
 
+- (IBAction)allFilesInfo:(UIButton *)sender
+{
+    // 显示日志信息：名称和大小
+    self.filesInfo.text = MMXLOG_ALL_XLOG_FILES_INFO();
+}
 @end

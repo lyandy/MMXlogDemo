@@ -14,6 +14,8 @@
 #import <mars/xlog/xlogger.h>
 #import <mars/xlog/appender.h>
 
+#import "AndyGCD.h"
+
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
 #else
@@ -43,12 +45,11 @@ static NSString *__xlog_upload_dir; // 日志上传文件夹
 + (void)initLogWithPubKey:(NSString *)pub_key
 {
     // "MMXlog" xlog 写日志目录
-    NSString* logPath = [self xlogLogDirectory];
-    
+    NSString* xlogLogPath = [self xlogLogDirectory];
     
     // 初始化 xlog：1、初始化控制台打印 2、将 mmap 里的数据会写到日志文件中
     // kAppednerAsync：异步写入xlog日志，不要使用 kAppednerSync ，可能会造成卡顿
-    appender_open(kAppednerAsync, [logPath UTF8String], "MMXlog", [pub_key UTF8String]);
+    appender_open(kAppednerAsync, [xlogLogPath UTF8String], "MMXlog", [pub_key UTF8String]);
     
     // 根据不同编译条件设定不同的 TLogLevel 和 是否需要控制台打印日志
 #if DEBUG
@@ -99,7 +100,8 @@ static NSString *__xlog_upload_dir; // 日志上传文件夹
     appender_set_console_log(enabled);
 }
 
-- (void)logWithLevel:(TLogLevel)logLevel moduleName:(const char*)moduleName fileName:(const char*)fileName lineNumber:(int)lineNumber funcName:(const char*)funcName message:(NSString *)message {
+- (void)logWithLevel:(TLogLevel)logLevel moduleName:(const char*)moduleName fileName:(const char*)fileName lineNumber:(int)lineNumber funcName:(const char*)funcName message:(NSString *)message
+{
     XLoggerInfo info;
     info.level = logLevel; // xlog level
     info.tag = moduleName; // 模块业务名称
@@ -115,7 +117,8 @@ static NSString *__xlog_upload_dir; // 日志上传文件夹
     });
 }
 
-- (void)logWithLevel:(TLogLevel)logLevel moduleName:(const char*)moduleName fileName:(const char*)fileName lineNumber:(int)lineNumber funcName:(const char*)funcName format:(NSString *)format, ... {
+- (void)logWithLevel:(TLogLevel)logLevel moduleName:(const char*)moduleName fileName:(const char*)fileName lineNumber:(int)lineNumber funcName:(const char*)funcName format:(NSString *)format, ...
+{
     if ([self hasFreeSpece] == NO) return;
     if ([MMXlogUtil shouldLog:logLevel] == NO) return;
     
@@ -124,6 +127,23 @@ static NSString *__xlog_upload_dir; // 日志上传文件夹
     NSString* message = [[NSString alloc] initWithFormat:format arguments:argList];
     [self logWithLevel:logLevel moduleName:moduleName fileName:fileName lineNumber:lineNumber funcName:funcName message:message];
     va_end(argList);
+}
+
+// 判断当前 TLogLevel 是否满足日志记录条件
++ (BOOL)shouldLog:(TLogLevel)level
+{
+    if (level >= xlogger_Level())
+    {
+        return YES;
+    }
+    
+    return NO;
+}
+
+// xlog s初始化
++ (void)appender_close
+{
+    appender_close();
 }
 
 #pragma mark - notification
@@ -173,6 +193,11 @@ static NSString *__xlog_upload_dir; // 日志上传文件夹
     appender_flush();
 }
 
++ (void)xlogFlush
+{
+    [[MMXlogUtil sharedUtil] flush];
+}
+
 - (BOOL)hasFreeSpece
 {
     NSTimeInterval now = [[NSDate date] timeIntervalSince1970];
@@ -201,30 +226,9 @@ static NSString *__xlog_upload_dir; // 日志上传文件夹
     return freespace;
 }
 
-+ (void)xlogFlush
-{
-    [[MMXlogUtil sharedUtil] flush];
-}
-
 + (NSArray *)localFilesArray
 {
     return [[[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self xlogLogDirectory] error:nil] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] '.xlog'"]]; //[c]不区分大小写 , [d]不区分发音符号即没有重音符号 , [cd]既不区分大小写，也不区分发音符号。
-}
-
-// 判断当前 TLogLevel 是否满足日志记录条件
-+ (BOOL)shouldLog:(TLogLevel)level {
-
-    if (level >= xlogger_Level()) {
-        return YES;
-    }
-    
-    return NO;
-}
-
-// xlog s初始化
-+ (void)appender_close
-{
-    appender_close();
 }
 
 + (NSString *)logFilePathWithFileName:(NSString *)fileName
@@ -232,7 +236,7 @@ static NSString *__xlog_upload_dir; // 日志上传文件夹
     return [[self xlogLogDirectory] stringByAppendingPathComponent:fileName];
 }
 
-+ (NSDictionary *)allFilesInfo
++ (NSDictionary *)allFilesInfoDict
 {
     NSArray *allFileNamesArr = [self localFilesArray];
     NSMutableDictionary *infoDic = [NSMutableDictionary dictionary];
@@ -242,6 +246,17 @@ static NSString *__xlog_upload_dir; // 日志上传文件夹
         [infoDic setObject:size forKey:fileName];
     }
     return infoDic;
+}
+
++ (NSString *)allFilesInfo
+{
+    NSDictionary *dict = [self allFilesInfoDict];
+    NSMutableString *str = [[NSMutableString alloc] init];
+    for (NSString *k in dict.allKeys) {
+        [str appendFormat:@"文件名称 %@，大小 %@byte\n", k, [dict objectForKey:k]];
+    }
+    
+    return [str copy];
 }
 
 + (unsigned long long)fileSizeAtPath:(NSString *)filePath
@@ -261,7 +276,7 @@ static NSString *__xlog_upload_dir; // 日志上传文件夹
 + (void)uploadXlogFile
 {
     // 1. 将当前的 mmap 的数据刷入文件
-    [MMXlogUtil xlogFlush];
+    appender_flush_sync();
     //2. 在 xlogQueue 队列通过 apply 将 MMXlog 根目录下的所有日志文件 移动到 xlog_upload 目录
     NSString *fromDir = [self xlogLogDirectory];
     NSString *toDir = [self xlogUploadDirectory];
@@ -271,7 +286,7 @@ static NSString *__xlog_upload_dir; // 日志上传文件夹
     dispatch_apply(fromFileNamesArr.count, [MMXlogUtil sharedUtil].xlogQueue, ^(size_t index) {
         NSString *fileName = fromFileNamesArr[index];
         NSString *fromFullpath = [fromDir stringByAppendingPathComponent:fileName];
-        NSString *toFileName = [NSString stringWithFormat:@"%@_%lld", fileName, @([[NSDate date] timeIntervalSince1970]).longLongValue];
+        NSString *toFileName = [NSString stringWithFormat:@"%@_%lld.%@", [fileName stringByDeletingPathExtension], @([[NSDate date] timeIntervalSince1970]).longLongValue, fileName.pathExtension];
         NSString *toFullpath = [toDir stringByAppendingPathComponent:toFileName];
         // 剪切
         [fileManager moveItemAtPath:fromFullpath toPath:toFullpath error:nil];
@@ -281,15 +296,15 @@ static NSString *__xlog_upload_dir; // 日志上传文件夹
     NSArray *uploadFileNamesArr = [[fileManager contentsOfDirectoryAtPath:toDir error:nil] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] '.xlog'"]];
     // 根据待上传文件个数开启线程，最多5个线程同时上传
     NSUInteger maxThreadCount = uploadFileNamesArr.count <= 5 ? uploadFileNamesArr.count : 5;
-//    AndyGCDQueue *contextQueue = [[AndyGCDQueue alloc] initWithQOS:NSQualityOfServiceUtility queueCount:maxThreadCount];
+    AndyGCDQueue *contextQueue = [[AndyGCDQueue alloc] initWithQOS:NSQualityOfServiceUtility queueCount:maxThreadCount];
     [uploadFileNamesArr enumerateObjectsUsingBlock:^(id  _Nonnull fileName, NSUInteger idx, BOOL * _Nonnull stop) {
         NSString *filePath = [toDir stringByAppendingPathComponent:fileName];
-        NSString *urlStr = [NSString stringWithFormat:@"http://127.0.0.1:3000/logupload?name=%@", [filePath lastPathComponent]];
+        NSString *urlStr = [NSString stringWithFormat:@"http://127.0.0.1:4000/logupload?name=%@", [filePath lastPathComponent]];
         NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlStr] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:60];
         [req setHTTPMethod:@"POST"];
         [req addValue:@"binary/octet-stream" forHTTPHeaderField:@"Content-Type"];
         NSURL *fileUrl = [NSURL fileURLWithPath:filePath];
-//        [contextQueue execute:^{
+        [contextQueue execute:^{
             NSURLSessionUploadTask *task = [[NSURLSession sharedSession] uploadTaskWithRequest:req fromFile:fileUrl completionHandler:^(NSData *_Nullable data, NSURLResponse *_Nullable response, NSError *_Nullable error) {
                 if (error == nil)
                 {
@@ -298,10 +313,11 @@ static NSString *__xlog_upload_dir; // 日志上传文件夹
                 }
             }];
             [task resume];
-//        }];
+        }];
     }];
 }
 
+// 删除过期文件
 + (void)deleteOutdatedUploadFiles
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -310,8 +326,10 @@ static NSString *__xlog_upload_dir; // 日志上传文件夹
     NSString *dateFormatString = @"yyyyMMdd";
     [formatter setDateFormat:dateFormatString];
     [uploadFileNamesArr enumerateObjectsUsingBlock:^(NSString *_Nonnull fileName, NSUInteger idx, BOOL *_Nonnull stop) {
-        NSString *dateStr = [fileName componentsSeparatedByString:@"_"].firstObject;
-        
+        NSArray *tempStrsArr = [[fileName stringByDeletingPathExtension] componentsSeparatedByString:@"_"];
+        if (tempStrsArr.count != 3) return;
+
+        NSString *dateStr = tempStrsArr[1];
         // 检查长度
         if (dateStr.length != (dateFormatString.length))
         {
@@ -387,6 +405,7 @@ static NSString *__xlog_upload_dir; // 日志上传文件夹
     return dir;
 }
 
+// 删除日志上传目录日志文件
 + (void)deleteXlogUploadFile:(NSString *)name
 {
     dispatch_async([MMXlogUtil sharedUtil].xlogQueue, ^{
