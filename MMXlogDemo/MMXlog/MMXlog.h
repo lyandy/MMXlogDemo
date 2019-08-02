@@ -41,7 +41,7 @@
 #define MMXLOG_SET_CONSOLE_LOG_ENABLED() [MMXlogUtil setConsoleLogEnabled:true]
 #define MMXLOG_SET_CONSOLE_LOG_DISABLED() [MMXlogUtil setConsoleLogEnabled:false]
 
-// 日志上传, 默认当前日志，格式：yyMMdd，例如：20190802
+// 日志上传, 默认当前日期，格式：yyMMdd，例如：20190802
 #define MMXLOG_UPLOAD_XLOG_FILE() [MMXlog uploadXlogFile]
 
 // 日志上传, 传入日期，格式：yyMMdd，例如：20190802
@@ -56,7 +56,7 @@ static const char *kModuleNetwork = "Network";
 
 @interface MMXlog : NSObject
 
-// 日志上传, 默认当前日志，格式：yyMMdd，例如：20190802
+// 日志上传, 默认当前日期，格式：yyMMdd，例如：20190802
 + (void)uploadXlogFile;
 
 // 日志上传, 默认当前日志，格式：yyMMdd，例如：20190802

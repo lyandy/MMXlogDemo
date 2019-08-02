@@ -14,8 +14,6 @@
 #import <mars/xlog/xlogger.h>
 #import <mars/xlog/appender.h>
 
-#import "AndyGCD.h"
-
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
 #else
@@ -132,11 +130,7 @@ static NSString * const log_file_prefix = @"MMXlog";
 // 判断当前 TLogLevel 是否满足日志记录条件
 + (BOOL)shouldLog:(TLogLevel)level
 {
-    if (level >= xlogger_Level())
-    {
-        return YES;
-    }
-    
+    if (level >= xlogger_Level()) return YES;
     return NO;
 }
 
@@ -152,7 +146,7 @@ static NSString * const log_file_prefix = @"MMXlog";
     // App Extension
     if ( [[[NSBundle mainBundle] bundlePath] hasSuffix:@".appex"] )
     {
-        return ;
+        return;
     }
 #if TARGET_OS_IPHONE
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
@@ -364,6 +358,5 @@ static NSString * const log_file_prefix = @"MMXlog";
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
 
 @end
