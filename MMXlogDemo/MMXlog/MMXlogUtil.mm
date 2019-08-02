@@ -22,15 +22,19 @@
 #import <Cocoa/Cocoa.h>
 #endif
 
-static NSUInteger g_processID = 0;
-
-static uint32_t __max_upload_reversed_date; // 日志上传文件最大过期时间
-static NSString *__xlog_upload_dir; // 日志上传文件夹
+static NSUInteger const g_processID = 0;
+static NSString * const log_file_prefix = @"MMXlog";
 
 @interface MMXlogUtil ()
 {
     NSTimeInterval _lastCheckFreeSpace;
 }
+
+#if OS_OBJECT_USE_OBJC
+@property (nonatomic, strong) dispatch_queue_t xlogQueue;
+#else
+@property (nonatomic, assign) dispatch_queue_t xlogQueue;
+#endif
 
 @end
 
@@ -49,7 +53,7 @@ static NSString *__xlog_upload_dir; // 日志上传文件夹
     
     // 初始化 xlog：1、初始化控制台打印 2、将 mmap 里的数据会写到日志文件中
     // kAppednerAsync：异步写入xlog日志，不要使用 kAppednerSync ，可能会造成卡顿
-    appender_open(kAppednerAsync, [xlogLogPath UTF8String], "MMXlog", [pub_key UTF8String]);
+    appender_open(kAppednerAsync, [xlogLogPath UTF8String], [log_file_prefix UTF8String], [pub_key UTF8String]);
     
     // 根据不同编译条件设定不同的 TLogLevel 和 是否需要控制台打印日志
 #if DEBUG
@@ -60,10 +64,6 @@ static NSString *__xlog_upload_dir; // 日志上传文件夹
     [self setConsoleLogEnabled:false];
 #endif
     
-    __xlog_upload_dir = @"xlog_upload"; // xlog 上传日志文件夹
-    __max_upload_reversed_date = 7; // 日志上传文件最大过期时间 七天
-    // 删除过期的 xlog_upload 文件夹下的e文件
-    [self deleteOutdatedUploadFiles];
 }
 
 + (instancetype)sharedUtil
@@ -119,8 +119,8 @@ static NSString *__xlog_upload_dir; // 日志上传文件夹
 
 - (void)logWithLevel:(TLogLevel)logLevel moduleName:(const char*)moduleName fileName:(const char*)fileName lineNumber:(int)lineNumber funcName:(const char*)funcName format:(NSString *)format, ...
 {
-    if ([self hasFreeSpece] == NO) return;
-    if ([MMXlogUtil shouldLog:logLevel] == NO) return;
+    if ([self hasFreeSpece] == NO) return; // 没有足够的磁盘空间
+    if ([MMXlogUtil shouldLog:logLevel] == NO) return; // 是否达到了日志记录级别
     
     va_list argList;
     va_start(argList, format);
@@ -191,11 +191,6 @@ static NSString *__xlog_upload_dir; // 日志上传文件夹
 - (void)flushInQueue
 {
     appender_flush();
-}
-
-+ (void)xlogFlush
-{
-    [[MMXlogUtil sharedUtil] flush];
 }
 
 - (BOOL)hasFreeSpece
@@ -277,82 +272,56 @@ static NSString *__xlog_upload_dir; // 日志上传文件夹
     }
 }
 
-+ (void)uploadXlogFile
++ (void)filePathForDate:(NSString *)date block:(xlogFilePathBlock)filePathBlock
 {
-    // 1. 将当前的 mmap 的数据刷入文件
-    appender_flush_sync();
-    //2. 在 xlogQueue 队列通过 apply 将 MMXlog 根目录下的所有日志文件 移动到 xlog_upload 目录
-    NSString *fromDir = [self xlogLogDirectory];
-    NSString *toDir = [self xlogUploadDirectory];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    [fileManager createDirectoryAtPath:toDir withIntermediateDirectories:YES attributes:nil error:nil];
-    NSArray *fromFileNamesArr = [[[[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self xlogLogDirectory] error:nil] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] '.xlog'"]] sortedArrayUsingSelector:@selector(compare:)]; //[c]不区分大小写 , [d]不区分发音符号即没有重音符号 , [cd]既不区分大小写，也不区分发音符号
-    dispatch_apply(fromFileNamesArr.count, [MMXlogUtil sharedUtil].xlogQueue, ^(size_t index) {
-        NSString *fileName = fromFileNamesArr[index];
-        NSString *fromFullpath = [fromDir stringByAppendingPathComponent:fileName];
-        NSString *toFileName = [NSString stringWithFormat:@"%@_%lld.%@", [fileName stringByDeletingPathExtension], @([[NSDate date] timeIntervalSince1970]).longLongValue, fileName.pathExtension];
-        NSString *toFullpath = [toDir stringByAppendingPathComponent:toFileName];
-        // 剪切
-        [fileManager moveItemAtPath:fromFullpath toPath:toFullpath error:nil];
-    });
-    
-    // 3. 遍历数据上传文件
-    NSArray *uploadFileNamesArr = [[fileManager contentsOfDirectoryAtPath:toDir error:nil] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] '.xlog'"]];
-    // 根据待上传文件个数开启线程，最多5个线程同时上传
-    NSUInteger maxThreadCount = uploadFileNamesArr.count <= 5 ? uploadFileNamesArr.count : 5;
-    AndyGCDQueue *contextQueue = [[AndyGCDQueue alloc] initWithQOS:NSQualityOfServiceUtility queueCount:maxThreadCount];
-    [uploadFileNamesArr enumerateObjectsUsingBlock:^(id  _Nonnull fileName, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSString *filePath = [toDir stringByAppendingPathComponent:fileName];
-        NSString *urlStr = [NSString stringWithFormat:@"http://127.0.0.1:4000/logupload?name=%@", [filePath lastPathComponent]];
-        NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlStr] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:60];
-        [req setHTTPMethod:@"POST"];
-        [req addValue:@"binary/octet-stream" forHTTPHeaderField:@"Content-Type"];
-        NSURL *fileUrl = [NSURL fileURLWithPath:filePath];
-        [contextQueue execute:^{
-            NSURLSessionUploadTask *task = [[NSURLSession sharedSession] uploadTaskWithRequest:req fromFile:fileUrl completionHandler:^(NSData *_Nullable data, NSURLResponse *_Nullable response, NSError *_Nullable error) {
-                if (error == nil)
-                {
-                    // 4. 上传成功后删除本地 xlog_upload 目录下文件
-                    [self deleteXlogUploadFile:fileName];
-                }
-            }];
-            [task resume];
-        }];
-    }];
-}
-
-// 删除过期文件
-+ (void)deleteOutdatedUploadFiles
-{
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSArray *uploadFileNamesArr = [[fileManager contentsOfDirectoryAtPath:[self xlogUploadDirectory] error:nil] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] '.xlog'"]];
-    __block NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    NSString *dateFormatString = @"yyyyMMdd";
-    [formatter setDateFormat:dateFormatString];
-    [uploadFileNamesArr enumerateObjectsUsingBlock:^(NSString *_Nonnull fileName, NSUInteger idx, BOOL *_Nonnull stop) {
-        NSArray *tempStrsArr = [[fileName stringByDeletingPathExtension] componentsSeparatedByString:@"_"];
-        if (tempStrsArr.count != 3) return;
-
-        NSString *dateStr = tempStrsArr[1];
-        // 检查长度
-        if (dateStr.length != (dateFormatString.length))
+    __block NSString *uploadFilePath = nil;
+    NSString *filePath = nil;
+    NSString *fileName = [log_file_prefix stringByAppendingString:[NSString stringWithFormat:@"_%@.xlog", date]];
+    if (date.length > 0)
+    {
+        NSArray *allFiles = [self localFilesArray];
+        if ([allFiles containsObject:fileName])
         {
-            [self deleteXlogUploadFile:fileName];
+            filePath = [self logFilePathWithFileName:fileName];
+            if ([[NSFileManager defaultManager] fileExistsAtPath:filePath])
+            {
+                uploadFilePath = filePath;
+            }
+        }
+    }
+    
+    if (uploadFilePath.length > 0)
+    {
+        if ([date isEqualToString:[self currentDate]])
+        {
+            dispatch_async([MMXlogUtil sharedUtil].xlogQueue, ^{
+                uploadFilePath = [[filePath stringByDeletingLastPathComponent] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%@.temp.xlog", log_file_prefix, date]];
+                [self todayFilePatch:filePathBlock uploadFilePath:uploadFilePath filePath:filePath];
+            });
             return;
         }
-        
-        // 转化为日期
-        dateStr = [dateStr substringToIndex:dateFormatString.length];
-        NSDate *date = [formatter dateFromString:dateStr];
-        NSString *todayStr = [self currentDate];
-        NSDate *todayDate = [formatter dateFromString:todayStr];
-        if (!date || [self getDaysFrom:date To:todayDate] >= __max_upload_reversed_date)
-        {
-            // 删除过期文件
-            [self deleteXlogUploadFile:fileName];
-        }
-    }];
+    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        filePathBlock(uploadFilePath);
+    });
 }
+
++ (void)todayFilePatch:(xlogFilePathBlock)filePathBlock uploadFilePath:(NSString *)uploadFilePath filePath:(NSString *)filePath
+{
+    appender_flush_sync();
+    NSError *error;
+    [[NSFileManager defaultManager] removeItemAtPath:uploadFilePath error:&error];
+    if (![[NSFileManager defaultManager] copyItemAtPath:filePath toPath:uploadFilePath error:&error])
+    {
+        uploadFilePath = nil;
+    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        filePathBlock(uploadFilePath);
+    });
+}
+
 
 + (NSString *)currentDate
 {
@@ -370,52 +339,17 @@ static NSString *__xlog_upload_dir; // 日志上传文件夹
     return [dateFormatter stringFromDate:[NSDate new]];
 }
 
-+ (NSInteger)getDaysFrom:(NSDate *)serverDate To:(NSDate *)endDate
-{
-    NSCalendar *gregorian = [[NSCalendar alloc]
-                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    
-    NSDate *fromDate;
-    NSDate *toDate;
-    [gregorian rangeOfUnit:NSCalendarUnitDay startDate:&fromDate interval:NULL forDate:serverDate];
-    [gregorian rangeOfUnit:NSCalendarUnitDay startDate:&toDate interval:NULL forDate:endDate];
-    NSDateComponents *dayComponents = [gregorian components:NSCalendarUnitDay fromDate:fromDate toDate:toDate options:0];
-    return dayComponents.day;
-}
-
-// 日志上传目录
-+ (NSString *)xlogUploadDirectory
-{
-    static NSString *dir = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        dir = [[self xlogLogDirectory] stringByAppendingPathComponent:__xlog_upload_dir];
-        
-        [self disableAppMobileBackupWithDir:dir];
-    });
-    return dir;
-}
-
 // 日志目录
 + (NSString *)xlogLogDirectory
 {
     static NSString *dir = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        dir = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingString:@"/MMXlog"];
+        dir = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:log_file_prefix];
         
         [self disableAppMobileBackupWithDir:dir];
     });
     return dir;
-}
-
-// 删除日志上传目录日志文件
-+ (void)deleteXlogUploadFile:(NSString *)name
-{
-    dispatch_async([MMXlogUtil sharedUtil].xlogQueue, ^{
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        [fileManager removeItemAtPath:[[self xlogUploadDirectory] stringByAppendingPathComponent:name] error:nil];
-    });
 }
 
 // 禁止 iOS 系统备份目录

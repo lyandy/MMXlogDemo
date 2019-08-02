@@ -25,7 +25,7 @@
 // 初始化xlog，不带加密 pub_key
 #define MMXLOG_INIT() [MMXlogUtil initLog];
 // 初始化xlog, 带有加密 pub_key
-#define MMXLOG_INIT_PUB_KEY(...) [MMXlogUtil initLog:##__VA_ARGS__]
+#define MMXLOG_INIT_PUB_KEY(pub_key) [MMXlogUtil initLog:pub_key]
 
 // 手动设定 xlog 日志记录界别
 #define MMXLOG_SET_LOG_LEVEL_ALL() [MMXlogUtil setLogLevel:kLevelAll]
@@ -41,8 +41,12 @@
 #define MMXLOG_SET_CONSOLE_LOG_ENABLED() [MMXlogUtil setConsoleLogEnabled:true]
 #define MMXLOG_SET_CONSOLE_LOG_DISABLED() [MMXlogUtil setConsoleLogEnabled:false]
 
-// 日志上传
-#define MMXLOG_UPLOAD_XLOG_FILE() [MMXlogUtil uploadXlogFile]
+// 日志上传, 默认当前日志，格式：yyMMdd，例如：20190802
+#define MMXLOG_UPLOAD_XLOG_FILE() [MMXlog uploadXlogFile]
+
+// 日志上传, 传入日期，格式：yyMMdd，例如：20190802
+#define MMXLOG_UPLOAD_XLOG_FILE_Date(date) [MMXlog uploadXlogFileWithDate:date]
+
 // 获取日志信息
 #define MMXLOG_ALL_XLOG_FILES_INFO() [MMXlogUtil allFilesInfo]
 
@@ -51,6 +55,12 @@ static const char *kModuleViewController = "ViewController";
 static const char *kModuleNetwork = "Network";
 
 @interface MMXlog : NSObject
+
+// 日志上传, 默认当前日志，格式：yyMMdd，例如：20190802
++ (void)uploadXlogFile;
+
+// 日志上传, 默认当前日志，格式：yyMMdd，例如：20190802
++ (void)uploadXlogFileWithDate:(NSString *)date;
 
 @end
 

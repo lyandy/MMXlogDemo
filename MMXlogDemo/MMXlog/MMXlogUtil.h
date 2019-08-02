@@ -16,16 +16,11 @@ NSString *aMessage = [NSString stringWithFormat:@"%@%@", prefix, [NSString strin
 [[MMXlogUtil sharedUtil] logWithLevel:level moduleName:module fileName:file lineNumber:line funcName:func message:aMessage]; \
 } \
 
+typedef void (^xlogFilePathBlock)(NSString * filePath);
 
 @interface MMXlogUtil : NSObject
 
 + (instancetype)sharedUtil;
-
-#if OS_OBJECT_USE_OBJC
-@property (nonatomic, strong) dispatch_queue_t xlogQueue;
-#else
-@property (nonatomic, assign) dispatch_queue_t xlogQueue;
-#endif
 
 // 初始化xlog，不带加密 pub_key
 + (void)initLog;
@@ -44,9 +39,6 @@ NSString *aMessage = [NSString stringWithFormat:@"%@%@", prefix, [NSString strin
 // 根据传入的 TLogLevel 来控制不同level记录，比如传入的 TLogLevel 为 kLevelInfo，则 kLevelDebug 级别的不会打印和记录
 + (BOOL)shouldLog:(TLogLevel)level;
 
-// 上传日志
-+ (void)uploadXlogFile;
-
 // 关闭日志记录，在程序退出的时候调用
 + (void)appender_close;
 
@@ -55,5 +47,11 @@ NSString *aMessage = [NSString stringWithFormat:@"%@%@", prefix, [NSString strin
 
 // 获取文件信息
 + (NSString *)allFilesInfo;
+
+// 当前日期字符串格式化 格式：yyMMdd，例如：20190802
++ (NSString *)currentDate;
+
+// 根据日期获取对应上传文件的路径
++ (void)filePathForDate:(NSString *)date block:(xlogFilePathBlock)filePathBlock;
 
 @end
